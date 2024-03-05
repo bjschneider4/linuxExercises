@@ -8,12 +8,6 @@ fi
 col_idx=$1
 file=$2
 
-sum=0
-num=0
+col=$(cut -d "," -f $col_idx $file | tail -n +2)
 
-w_head=$(cut -d "," -f col_idx file)
-use_col=$(tail -n +2 w_head)
-
-function find_mean {
-# blah blah blah
-    }
+echo $col | sed -e 's/ /\n/g' | {sum=0; num=0; mean=0;  while read col; do sum=$(($sum + $col));  num=$(($num + 1)); mean=$(($sum / $num)); done; echo $mean; }
